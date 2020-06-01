@@ -7,6 +7,6 @@ const routes = Router();
 
 routes.use('/customers', customersRouter);
 routes.use('/products', productsRouter);
-// routes.use('/orders', ordersRouter);
+routes.use('/orders', ordersRouter);
 
 export default routes;
