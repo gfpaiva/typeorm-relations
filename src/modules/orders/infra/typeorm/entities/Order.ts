@@ -20,7 +20,7 @@ class Order {
   @Column('uuid')
   customer_id: string;
 
-  @OneToOne(() => Customer)
+  @OneToOne(() => Customer, { eager: true })
   @JoinColumn({ name: 'customer_id' })
   customer: Customer;
 

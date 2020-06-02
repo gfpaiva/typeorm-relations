@@ -81,8 +81,8 @@ class CreateOrderService {
 
       if (findProduct) {
         createOrderProducts.push({
-          ...product,
           product_id: product.id,
+          quantity: product.quantity,
           price: findProduct.price,
         });
 
@@ -93,19 +93,16 @@ class CreateOrderService {
       }
     });
 
-    // Decrement product total quantity
-    await this.productsRepository.updateQuantity(newQuantityProducts);
-
     // Create order
     const order = await this.ordersRepository.create({
       customer,
       products: createOrderProducts,
     });
 
-    return {
-      ...order,
-      customer,
-    };
+    // Decrement product total quantity
+    await this.productsRepository.updateQuantity(newQuantityProducts);
+
+    return order;
   }
 }
 
